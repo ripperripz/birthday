@@ -248,7 +248,7 @@ function IntroScreen({ onEnter }) {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 1 }}
       >
-        Jashan
+        Babuuu
       </motion.p>
 
       <motion.button
@@ -474,7 +474,7 @@ function MainSite() {
             transition={{ delay: 0.8, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <span className="line1">Happy Birthday</span>
-            <span className="line2">Jashan!</span>
+            <span className="line2">Babuuu!</span>
           </motion.h1>
 
           <motion.p
@@ -532,7 +532,7 @@ function MainSite() {
             <AnimatedCake size={320} />
           </motion.div>
 
-          <h2 className="wish-heading">Make a Wish, Jashan</h2>
+          <h2 className="wish-heading">Make a Wish, Babuuu</h2>
           <p className="wish-sub">Close your eyes and dream big...</p>
 
           <div className="sticker-row">
@@ -576,7 +576,7 @@ function MainSite() {
           </div>
 
           <p className="letter-date">April 27, 2026</p>
-          <h3 className="letter-salutation">My Dearest Jashan,</h3>
+          <h3 className="letter-salutation">My Dearest Babuuu,</h3>
 
           <div className="letter-body">
             <p>
@@ -628,7 +628,7 @@ function MainSite() {
           <Cake size={56} color="#ff85a1" strokeWidth={1.2} />
         </motion.div>
 
-        <h3 className="footer-heading">Happy Birthday, Jashan!</h3>
+        <h3 className="footer-heading">Happy Birthday, Babuuu!</h3>
         <p className="footer-sub">Click the cake for a surprise</p>
 
         <div className="footer-stickers">
