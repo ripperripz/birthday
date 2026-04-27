@@ -130,8 +130,35 @@ function RisingBalloons() {
 
 // ─── Animated SVG Cake ───
 function AnimatedCake({ size = 300 }) {
+  const [isLit, setIsLit] = useState(true);
+
+  const blowOut = () => {
+    if (!isLit) return;
+    setIsLit(false);
+    // Extra celebration when blown out
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#ff85a1', '#ffd93d', '#fff']
+    });
+    // Relight after 3 seconds
+    setTimeout(() => setIsLit(true), 3000);
+  };
+
   return (
-    <div style={{ width: size, height: size, margin: '0 auto', position: 'relative' }}>
+    <div 
+      onClick={blowOut}
+      style={{ 
+        width: size, 
+        height: size, 
+        margin: '0 auto', 
+        position: 'relative', 
+        cursor: isLit ? 'pointer' : 'default',
+        filter: isLit ? 'none' : 'grayscale(0.2) brightness(0.9)'
+      }}
+      title={isLit ? "Click to blow out the candles!" : "Wishing..."}
+    >
       <svg viewBox="0 0 120 120" width={size} height={size} fill="none">
         {/* Plate */}
         <ellipse cx="60" cy="108" rx="55" ry="8" fill="#f0e0e0" />
@@ -163,29 +190,39 @@ function AnimatedCake({ size = 300 }) {
             <rect x={cx - 1.5} y="28" width="3" height="18" rx="1.5"
               fill={['#ffd93d', '#e2bcff', '#b9e9ff', '#ffb6c1', '#ff85a1'][i]} />
             {/* Flame */}
-            <motion.ellipse
-              cx={cx}
-              cy="24"
-              rx="4"
-              ry="6"
-              fill="#ffd93d"
-              animate={{
-                ry: [5, 7, 5],
-                rx: [3.5, 4.5, 3.5],
-                opacity: [0.8, 1, 0.8],
-              }}
-              transition={{ duration: 0.4 + i * 0.1, repeat: Infinity, ease: 'easeInOut' }}
-            />
-            <motion.ellipse
-              cx={cx}
-              cy="24"
-              rx="2"
-              ry="3.5"
-              fill="#fff"
-              fillOpacity="0.7"
-              animate={{ ry: [3, 4, 3] }}
-              transition={{ duration: 0.3 + i * 0.1, repeat: Infinity, ease: 'easeInOut' }}
-            />
+            <AnimatePresence>
+              {isLit && (
+                <motion.g
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0, opacity: 0 }}
+                >
+                  <motion.ellipse
+                    cx={cx}
+                    cy="24"
+                    rx="4"
+                    ry="6"
+                    fill="#ffd93d"
+                    animate={{
+                      ry: [5, 7, 5],
+                      rx: [3.5, 4.5, 3.5],
+                      opacity: [0.8, 1, 0.8],
+                    }}
+                    transition={{ duration: 0.4 + i * 0.1, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                  <motion.ellipse
+                    cx={cx}
+                    cy="24"
+                    rx="2"
+                    ry="3.5"
+                    fill="#fff"
+                    fillOpacity="0.7"
+                    animate={{ ry: [3, 4, 3] }}
+                    transition={{ duration: 0.3 + i * 0.1, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                </motion.g>
+              )}
+            </AnimatePresence>
           </g>
         ))}
         {/* Star on top */}
